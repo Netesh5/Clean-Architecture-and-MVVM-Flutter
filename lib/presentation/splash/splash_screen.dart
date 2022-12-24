@@ -1,5 +1,6 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:cleanarchmvvm/presentation/resources/assets_manager.dart';
+import 'package:cleanarchmvvm/presentation/resources/color_manager.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,6 +12,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: ColorManager.primaryColor,
+      body:
+          const Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
+    );
   }
 }
