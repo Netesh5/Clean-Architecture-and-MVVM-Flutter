@@ -1,5 +1,6 @@
 import 'package:cleanarchmvvm/presentation/forget_password/forget_password.dart';
 import 'package:cleanarchmvvm/presentation/login/login.dart';
+import 'package:cleanarchmvvm/presentation/onBoarding/on_boarding.dart';
 import 'package:cleanarchmvvm/presentation/register/register.dart';
 import 'package:cleanarchmvvm/presentation/resources/string_manager.dart';
 import 'package:cleanarchmvvm/presentation/splash/splash_screen.dart';
@@ -22,7 +23,7 @@ class RoutesGenerator {
       case Routes.splashScreen:
         return MaterialPageRoute(builder: ((context) => const SplashScreen()));
       case Routes.onBoardingScreen:
-        return MaterialPageRoute(builder: ((context) => const SplashScreen()));
+        return MaterialPageRoute(builder: ((context) => const OnBoarding()));
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
             builder: ((context) => const ForgetPassword()));
