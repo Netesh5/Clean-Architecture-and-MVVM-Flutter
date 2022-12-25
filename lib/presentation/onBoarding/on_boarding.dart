@@ -4,6 +4,7 @@ import 'package:cleanarchmvvm/presentation/resources/string_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -47,7 +48,9 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ),
         body: PageView.builder(
-            itemBuilder: ((context, index) {}),
+            itemBuilder: ((context, index) {
+              return OnBoardingPage(_list[index]);
+            }),
             itemCount: _list.length,
             controller: _pageController,
             onPageChanged: (value) {
@@ -57,6 +60,44 @@ class _OnBoardingState extends State<OnBoarding> {
                 },
               );
             }));
+  }
+}
+
+class OnBoardingPage extends StatelessWidget {
+  SliderObject _sliderObject;
+
+  OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: AppSize.as40,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(PaddingManager.p8),
+          child: Text(
+            _sliderObject.title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(PaddingManager.p8),
+          child: Text(
+            _sliderObject.subtitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+        ),
+        const SizedBox(
+          height: AppSize.as40,
+        ),
+        SvgPicture.asset(ImageAssets.onBoardingImage1)
+      ],
+    );
   }
 }
 
