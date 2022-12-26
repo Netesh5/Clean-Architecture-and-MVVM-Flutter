@@ -9,4 +9,6 @@ class AppString {
   static const String onBoardingSubtitle2 = "On Boarding Subtitle";
   static const String onBoardingSubtitle3 = "On Boarding Subtitle";
   static const String onBoardingSubtitle4 = "On Boarding Subtitle";
+
+  static const String skip = "Skip";
 }

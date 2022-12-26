@@ -1,6 +1,7 @@
 import 'package:cleanarchmvvm/presentation/resources/assets_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/color_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/string_manager.dart';
+import 'package:cleanarchmvvm/presentation/resources/textstyle_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,28 +39,112 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorManager.white,
-        appBar: AppBar(
-          elevation: AppSize.ap1_5,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ColorManager.white,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark,
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        elevation: AppSize.ap1_5,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: ColorManager.white,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      ),
+      body: PageView.builder(
+          itemBuilder: ((context, index) {
+            return OnBoardingPage(_list[index]);
+          }),
+          itemCount: _list.length,
+          controller: _pageController,
+          onPageChanged: (value) {
+            setState(
+              () {
+                _currentIndex = value;
+              },
+            );
+          }),
+      bottomSheet: Container(
+        color: ColorManager.primaryColor,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(AppString.skip,
+                      textAlign: TextAlign.end,
+                      style: getRegularTextStyle(
+                        color: ColorManager.primaryColor,
+                      ))),
+            ),
+            _getBottomSheetWidget()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(PaddingManager.p8),
+          child: GestureDetector(
+            child: SizedBox(
+                height: AppSize.as20,
+                width: AppSize.as60,
+                child: SvgPicture.asset(ImageAssets.left_arrow)),
+            onTap: () {
+              _pageController.animateToPage(_getNextIndex(),
+                  duration: const Duration(seconds: Durationconst.d300),
+                  curve: Curves.bounceInOut);
+            },
           ),
         ),
-        body: PageView.builder(
-            itemBuilder: ((context, index) {
-              return OnBoardingPage(_list[index]);
-            }),
-            itemCount: _list.length,
-            controller: _pageController,
-            onPageChanged: (value) {
-              setState(
-                () {
-                  _currentIndex = value;
-                },
-              );
-            }));
+        Row(
+          children: [
+            for (int i = 0; i < _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(PaddingManager.p8),
+                child: _getCircle(i),
+              ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(PaddingManager.p8),
+          child: GestureDetector(
+            child: SizedBox(
+                height: AppSize.as20,
+                width: AppSize.as60,
+                child: SvgPicture.asset(ImageAssets.right_arrow)),
+            onTap: () {},
+          ),
+        ),
+      ],
+    );
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--;
+    if (previousIndex == -1) {
+      _currentIndex = _list.length - 1;
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++;
+    if (nextIndex >= _list.length) {
+      _currentIndex = 0;
+    }
+    return _currentIndex;
+  }
+
+  Widget _getCircle(int index) {
+    if (index == _currentIndex) {
+      return SvgPicture.asset(ImageAssets.hollow_circle);
+    } else {
+      return SvgPicture.asset(ImageAssets.solid_circle);
+    }
   }
 }
 
