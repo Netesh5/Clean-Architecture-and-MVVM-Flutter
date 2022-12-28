@@ -1,5 +1,6 @@
 import 'package:cleanarchmvvm/presentation/resources/assets_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/color_manager.dart';
+import 'package:cleanarchmvvm/presentation/resources/routes_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/string_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/textstyle_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/value_manager.dart';
@@ -35,7 +36,7 @@ class _OnBoardingState extends State<OnBoarding> {
             image: ImageAssets.onBoardingImage4),
       ];
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,31 +49,36 @@ class _OnBoardingState extends State<OnBoarding> {
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
-      body: PageView.builder(
-          itemBuilder: ((context, index) {
-            return OnBoardingPage(_list[index]);
-          }),
-          itemCount: _list.length,
-          controller: _pageController,
-          onPageChanged: (value) {
-            setState(
-              () {
-                _currentIndex = value;
-              },
-            );
-          }),
+      body: SafeArea(
+        child: PageView.builder(
+            itemBuilder: ((context, index) {
+              return OnBoardingPage(_list[index]);
+            }),
+            itemCount: _list.length,
+            controller: _pageController,
+            onPageChanged: (value) {
+              setState(
+                () {
+                  _currentIndex = value;
+                },
+              );
+            }),
+      ),
       bottomSheet: Container(
+        height: 100,
         color: ColorManager.primaryColor,
         child: Column(
           children: [
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, Routes.loginScreen);
+                  },
                   child: Text(AppString.skip,
                       textAlign: TextAlign.end,
                       style: getRegularTextStyle(
-                        color: ColorManager.primaryColor,
+                        color: ColorManager.white,
                       ))),
             ),
             _getBottomSheetWidget()
@@ -116,7 +122,9 @@ class _OnBoardingState extends State<OnBoarding> {
                 height: AppSize.as20,
                 width: AppSize.as60,
                 child: SvgPicture.asset(ImageAssets.right_arrow)),
-            onTap: () {},
+            onTap: () {
+              setState(() {});
+            },
           ),
         ),
       ],

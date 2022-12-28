@@ -11,7 +11,7 @@ TextStyle _textStyle(
 }
 
 TextStyle getRegularTextStyle(
-    {double fontSize = FontSizeManager.f12, required Color color}) {
+    {double fontSize = FontSizeManager.f18, required Color color}) {
   return _textStyle(
       fontSize, FontConstant.fontFamily, FontWeightManager.regular, color);
 }
