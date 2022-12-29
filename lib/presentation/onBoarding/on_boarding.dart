@@ -123,6 +123,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 width: AppSize.as60,
                 child: SvgPicture.asset(ImageAssets.right_arrow)),
             onTap: () {
+              //a
               setState(() {});
             },
           ),
