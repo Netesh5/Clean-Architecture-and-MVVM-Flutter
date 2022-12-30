@@ -100,6 +100,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 width: AppSize.as60,
                 child: SvgPicture.asset(ImageAssets.left_arrow)),
             onTap: () {
+              _getPreviousIndex();
               _pageController.animateToPage(_getNextIndex(),
                   duration: const Duration(seconds: Durationconst.d300),
                   curve: Curves.bounceInOut);
@@ -124,6 +125,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: SvgPicture.asset(ImageAssets.right_arrow)),
             onTap: () {
               //a
+              _getNextIndex();
               setState(() {});
             },
           ),
