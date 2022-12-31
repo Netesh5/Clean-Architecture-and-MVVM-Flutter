@@ -1,3 +1,4 @@
+import 'package:cleanarchmvvm/domain/model.dart';
 import 'package:cleanarchmvvm/presentation/resources/assets_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/color_manager.dart';
 import 'package:cleanarchmvvm/presentation/resources/routes_manager.dart';
@@ -195,12 +196,4 @@ class OnBoardingPage extends StatelessWidget {
       ],
     );
   }
-}
-
-class SliderObject {
-  String title;
-  String subtitle;
-  String image;
-  SliderObject(
-      {required this.title, required this.subtitle, required this.image});
 }
