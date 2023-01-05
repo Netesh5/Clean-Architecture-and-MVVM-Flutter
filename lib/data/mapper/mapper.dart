@@ -20,3 +20,9 @@ extension ContactResponseMapper on ContactResponse? {
         this?.email?.orEmpty() ?? empty, this?.phone?.orEmpty() ?? empty);
   }
 }
+
+extension AuthenticationResponseMapper on Authentication? {
+  Authentication toDomain() {
+    return Authentication(this?.customer, this?.contacts);
+  }
+}
